@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>间歇调用与超时调用</title>
+	<script>
+		// var id = setInterval(function(){
+		var id = setTimeout(function(){
+			console.log(Math.random());
+			//js 刷新 抢票 trigger 勾选硬卧，下单
+		},3000);
+		// console.log("id",id);
+
+		window.onload = function(){
+			document.getElementById("btn_stop").onclick = function(){
+				clearInterval(id);
+			}
+		}
+
+
+
+	</script>
+
+</head>
+<body>
+	<button id="btn_stop">停止</button>
+</body>
+</html>

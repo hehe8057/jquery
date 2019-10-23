@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>bootstrap组件</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+	<script type="text/javascript" src="./js/jquery-3.4.1.min.js" ></script>
+	<script type="text/javascript" src="./bootstrap/js/bootstrap.js" ></script>
+	<script>
+	function closeModal(){
+		$(this).parents(".modal").modal("hide");
+	}
+		$(function(){
+           $('#btn_add').click(function(){
+           	//让exampleModal显示
+           	$("#exampleModal").modal("show");
+           });
+             $('#btn_qx').click(function(){
+           	//让exampleModal显示
+           	$("#qxModal").modal("show");
+           });
+		});
+	</script>
+</head>
+<body>
+	<div class="container">
+	<br>
+		<!-- Button trigger modal -->
+		<button id="btn_add" type="button" class="btn btn-primary">
+		  添加
+		</button>
+         <button id="btn_qx" type="button" class="btn btn-primary">
+		  权限
+		</button>
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-xl" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">添加用户信息</h5>
+		        <button type="button" class="close" onclick="closeModal.call(this)">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		<!-- bengin -->
+                <form action="">
+				<!-- 姓名 -->
+				<div class="form-group row">
+					<label for="input_username" class="col-sm-1 text-center ">姓名</label>
+					<div class="col-sm-11">
+						<input id="input_username" class="form form-control" type="text" name="username"/>
+					</div>	      
+				</div>
+				<!-- 密码 -->
+		        <div class="form-group row">
+		        	<label for="input_password " class="col-sm-2 text-right">密码</label>
+		        	<div class="col-sm-10">
+		        		<input id="input_password" class="form-control" type="password" name="password"/>
+		        	</div>
+		        </div>
+		        <!-- 方向 -->
+		        <div class="form-froup row">
+		        	<label for="input_directioin" class="col-sm-2 text-right">方向</label>
+		        	<div class="col-sm-10">
+			        	<select class="form-control " name="direction" id="input_direction">
+				            <option value="1">WebUI</option>
+				            <option value="2">JavaEE</option>
+				            <option value="3">BigData</option>
+			        	</select>
+		        	</div>
+		        </div>
+		        <!-- 性别 -->
+		        <div class="form-group row">
+		        	<label class="col-sm-2 text-right">性别</label>
+		            <div class="col-sm-10">
+		            		<!-- 男 -->
+		         		<div class="form-check form-check-inline">
+		         			<input id="input_gender_male" class="form-check-input" type="radio" name="gender" value="male"/>
+		         			<label class="form-check-label" for="input_gender_male">男</label>
+		         		</div>
+		           <!-- 女 -->
+		         		<div class="form-check form-check-inline">
+		         			<input id="input_gender" class="form-check-input" type="radio" name="gender" value="female"/>
+		         			<label class="form-check-label" for="input_gender_female">女</label>
+		         		</div>
+		            </div>
+		        </div>
+		        <!-- 爱好 -->
+		        <div class="from-group row">
+		        	<label class="col-sm-2 text-right">爱好</label>
+		    		<div class="col-sm-10">
+		    			<div class="form-check form-check-inline">
+		    				<input id="input_hobbies_basketball" class="form-check-input" type="checkbox" name="hobbies" value="basketball">
+		    				<label class="form-check-label" for="input_hobbies_basketball">篮球</label>
+		    			</div>
+		    			<div class="form-check form-check-inline">
+		    				<input id="input_hobbies_football" class="form-check-input" type="checkbox" name="hobbies" value="football">
+		    				<label class="form-check-label" for="input_hobbies_football">足球</label>
+		    			</div>
+		    		</div>
+		        </div>
+		        <!-- 提交按钮 -->
+		        <div class="row">
+		        	<div class="col text-right">
+		        		<input type="submit"  class="btn btn-primary" value="提交">
+		        	</div>
+		        </div>
+				</form>
+		    <!-- end -->
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" onclick="closeModal.call(this)">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- modal -->
+		<!-- Modal -->
+		<div class="modal fade" id="qxModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">添加权限</h5>
+		        <button type="button" class="close" onclick="closeModal.call(this)">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        ...
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" onclick="closeModal.call(this)">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- modal -->
+	</div>
+</body>
+</html>

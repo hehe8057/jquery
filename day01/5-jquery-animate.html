@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery动画</title>
+	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+	window.onload = function(){
+		$("button").filter(":first-child").click(function(){
+			// $(".box").fadeIn();
+			// $(".box").slideUp();
+			// $(".box").animate({
+			// 	height:"200px"
+			// },1000);
+		});
+		$("button").filter(":last-child").click(function(){
+			// $(".box").fadeOut();
+			// $(".box").slideDown();
+			// $(".box").animate({
+			// 	height:0
+			// },1000);
+
+			var height = 200;
+			var id = setInterval(function(){
+				if(height<=0){
+					clearInterval(id);
+				}
+				height -= 10;
+				$(".box").css("height",height);
+			},100);
+		});
+	}
+
+	</script>
+	<style>
+		.btns {
+			margin-bottom: 1em;
+		}
+		.box {
+			height: 200px;
+			background-color: pink;
+		}
+	</style>
+</head>
+<body>
+	<div class="btns">
+		<button>显示</button>
+		<button>隐藏</button>
+	</div>
+	<div class="box">
+		
+	</div>
+</body>
+</html>

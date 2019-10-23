@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>bootstrap组件</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+	<script type="text/javascript" src="./js/jquery-3.4.1.min.js" ></script>
+	<script type="text/javascript" src="./bootstrap/js/bootstrap.js" ></script>
+</head>
+<body>
+	<div class="alert alert-danger rounded-0">
+			hello world
+	</div>
+	<div class="container">
+		<br>
+		<div class="alert alert-danger alert-dissmissible">
+			hello world
+			<button class="close" data-dismiss="alert">&times;</button>
+			<br>
+			你好，世界
+		</div>
+
+		<div class="alert alert-danger alert-dissmissible">
+			hello world
+			<button class="close" id="btn_close">&times;</button>
+			<br>
+			你好，世界
+		</div>
+        
+        <button id="btn_show" class="btn btn-primary">显示</button>
+	</div>
+	<script>
+        function closeAlert(){
+        	$(this).parents(".alert").alert('close');
+        }
+
+		$(function(){
+			//为btn_close绑定事件
+			$("#btn_close").click(function(){
+				//$(this).parents(".alert").remove();
+                
+                //jquery对象可以调用jQuery.prototype.xxx
+				$(this).parents(".alert").alert('close');
+			});
+
+			$("#btn_show").click(function(){
+				$(`<div class="alert alert-primary alert-dissmissible">
+					hello world
+					<button class="close" onclick="closeAlert.call(this)">&times;</button>
+				</div>`).prependTo($('body'));
+			});
+		});
+	</script>
+</body>
+</html>

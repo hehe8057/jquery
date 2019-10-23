@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.10.1/css/all.css">
+	<script type="text/javascript" src="./js/jquery-3.4.1.min.js" ></script>
+	<script type="text/javascript" src="./bootstrap/js/bootstrap.js" ></script>
+	<script>
+	var baseURL = "http://134.175.100.63:6677";
+	//关闭模态框
+	function closeModal(){
+		//编写代码重置表单
+		$(this).parents(".modal").modal("hide");
+	}
+	//加载数据
+	function reloadData(){
+         var url = baseURL+"/customer/findAll";
+         $.get(url,function(result){
+             if(result.status === 200){
+             	$("#customer_table >tbody").empty();
+               result.data.forEach(function(item){
+               	$(`<tr>
+				<td class="text-center"><input type="checkbox" value="`+item.id+`"></td>
+				<td >`+item.status+`</td>
+				<td>`+item.realname+`</td>
+				<td>`+item.telephone+`</td>
+				<td class="text-center">
+					<a href=""  class="btn  btn-link  btn-sm">删除</a>
+				</td>
+			</tr>`).appendTo("#customer_table");
+               })
+             }else{
+             	alert("服务接口出错!");
+             }
+         })
+	}
+
+
+    //保存或更新顾客信息
+    function submitCustomer(){
+    	//1.获取用户名手机号和密码
+        var realname = $("#customer_form input[name=username]").val();
+        var password = $("#customer_form input[name=password]").val();
+        var telephone = $("#customer_form input[name=telephone]").val();
+    	//2.与后台交互
+        var url = baseURL + "/customer/saveOrUpdate";
+        var data = {
+        	realname:realname,
+        	password:password,
+        	telephone:telephone
+        };
+        $.post(url,data,function(result){
+             if(result.status === 200){
+               $("#customerModal").modal("hide");
+             	reloadData();
+             }else{
+             	alert("接口异常");
+             }
+        })
+
+    }
+
+	$(function(){
+       //1.重载数据
+       reloadData();
+       //2.为添加按钮绑定事件
+       $("#btn_add").click(function(){
+       	  $("#customerModal").modal("show");
+       });
+       //3.监听模态框的关闭
+    	$('#customerModal').on('hidden.bs.modal',function(e){
+    		$(this).find("form")[0].reset();
+    	})
+	});
+	</script>
+</head>
+<body>
+   <div class="container">
+   <br>
+   <div class="btns mb-2">
+   		<button class="btn btn-primary" id="btn_add">添加</button>
+   </div>
+	<table class="table  table-sm  table-hover table-bordered" id="customer_table">
+		<thead>
+			<tr>
+				<td width="60" class="text-center">编号</td>
+				<td>状态</td>
+				<td>姓名</td>
+				<td>手机号</td>
+				<td width="100" class="text-center">操作</td>
+			</tr>
+			</thead>
+			<tbody>
+			
+		    </tbody>
+	</table>
+	</div>
+
+	<!-- 模态框 -->
+		<div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-xl" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">添加用户信息</h5>
+		        <button type="button" class="close" onclick="closeModal.call(this)">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		<!-- bengin -->
+                <form id="customer_form">
+				<!-- 姓名 -->
+				<div class="form-group row">
+					<label for="input_username" class="col-sm-1 text-center ">姓名</label>
+					<div class="col-sm-11">
+						<input id="input_username" class="form form-control" type="text" name="username"/>
+					</div>	      
+				</div>
+				<!-- 密码 -->
+		        <div class="form-group row">
+		        	<label for="input_password " class="col-sm-2 text-right">密码</label>
+		        	<div class="col-sm-10">
+		        		<input id="input_password" class="form-control" type="password" name="password"/>
+		        	</div>
+		        </div>
+		        <!-- 手机号 -->
+		        <div class="form-group row">
+		        	<label for="input_telephone " class="col-sm-2 text-right">手机号</label>
+		        	<div class="col-sm-10">
+		        		<input id="input_telephone" class="form form-control" type="text" name="telephone"/>
+		        	</div>
+		        </div>
+		    <!-- end -->
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" onclick="closeModal.call(this)">Close</button>
+		        <button type="button" class="btn btn-primary" onclick="submitCustomer()">保存</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- modal -->
+</body>
+</html>
